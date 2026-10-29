@@ -1,4 +1,12 @@
 //
-//  Use this file to import your target's public headers that you would like to expose to Swift.
+//  DaytonSaturn-Bridging-Header.h
+//  DaytonSaturn
+//
+//  Created by Paul Casiero on 10/28/26.
 //
 
+#ifndef DaytonSaturn_Bridging_Header_h
+#define DaytonSaturn_Bridging_Header_h
+
+
+#endif /* DaytonSaturn_Bridging_Header_h */
