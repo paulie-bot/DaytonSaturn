@@ -35,16 +35,6 @@
 			path = DaytonSaturn;
 			sourceTree = "<group>";
 		};
-		202E6D08308EAA5700006772 /* DaytonSaturnTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = DaytonSaturnTests;
-			sourceTree = "<group>";
-		};
-		202E6D12308EAA5700006772 /* DaytonSaturnUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = DaytonSaturnUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,8 +66,6 @@
 			isa = PBXGroup;
 			children = (
 				202E6CFA308EAA5600006772 /* DaytonSaturn */,
-				202E6D08308EAA5700006772 /* DaytonSaturnTests */,
-				202E6D12308EAA5700006772 /* DaytonSaturnUITests */,
 				202E6CF9308EAA5600006772 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -130,9 +118,6 @@
 			dependencies = (
 				202E6D07308EAA5700006772 /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				202E6D08308EAA5700006772 /* DaytonSaturnTests */,
-			);
 			name = DaytonSaturnTests;
 			packageProductDependencies = (
 			);
@@ -152,9 +137,6 @@
 			);
 			dependencies = (
 				202E6D11308EAA5700006772 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				202E6D12308EAA5700006772 /* DaytonSaturnUITests */,
 			);
 			name = DaytonSaturnUITests;
 			packageProductDependencies = (
