@@ -18,13 +18,17 @@ struct ContentView: View {
     @State private var b6 = ""
     
     @State private var selectedOption = "A"
-    let options = ["A", "B", "C", "D"]
     
+    let options = ["A", "B", "C", "D"]
+    @State private var schedule = ["", "", "", "", "", "", "", ""]
     var body: some View {
         ZStack {
             Text("DaytonSaturn Prototype")
                 .position(x:180, y:20)
                 .font(.largeTitle)
+                .onAppear {
+                    requestPermission()
+                }
             
             Button("Write Schedule") {
                 if selectedOption == "A" {
@@ -47,19 +51,29 @@ struct ContentView: View {
             
             Button("Read Schedule") {
                 if selectedOption == "A" {
+                     schedule = readSchedule("ADay.txt")
                      print(readSchedule("ADay.txt"));
                 }
                 else if selectedOption == "B" {
+                    schedule = readSchedule("BDay.txt")
                     print(readSchedule("BDay.txt"));
                 }
                 else if selectedOption == "C" {
+                    schedule = readSchedule("CDay.txt")
                     print(readSchedule("CDay.txt"));
                 }
                 else if selectedOption == "D" {
+                    schedule = readSchedule("DDay.txt")
                     print(readSchedule("DDay.txt"));
                 }
             }
             .background(Color.white)
+            
+            Button("Send Notification") {
+                sendNotification("Test", "Test")
+            }
+            .background(Color.white)
+            .position(x: 100, y: 600)
             
             TextField("Block 1: ", text: $b1)
                 .background(Color.white)
@@ -110,6 +124,29 @@ struct ContentView: View {
             .tint(.black)
             .position(x:80, y: 270)
             
+            Text("Block 1: \(schedule[0])")
+                .position(x: 1000, y: 70)
+            
+            Text("Block 2: \(schedule[1])")
+                .position(x: 1000, y: 100)
+            
+            Text("Block 3: \(schedule[2])")
+                .position(x: 1000, y: 130)
+            
+            Text("Lunch 1/Class: \(schedule[3])")
+                .position(x: 1000, y: 160)
+            
+            Text("Lunch 2/Class: \(schedule[4])")
+                .position(x: 1000, y: 190)
+            
+            Text("Lunch 3/Class: \(schedule[5])")
+                .position(x: 1000, y: 220)
+            
+            Text("Block 5: \(schedule[6])")
+                .position(x: 1000, y: 250)
+            
+            Text("Block 6: \(schedule[7])")
+                .position(x: 1000, y: 280)
         }
         .background(Color.cyan)
         .offset(y: 0)

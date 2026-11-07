@@ -7,7 +7,9 @@
 
 
 import Foundation
+import UserNotifications
 
+//writes a schedule to a file
 func writeSchedule(_ b1: String,
                   _ b2: String,
                   _ b3: String,
@@ -43,6 +45,7 @@ func writeSchedule(_ b1: String,
     }
 }
 
+//reads a schedule from a file and returns it as a list
 func readSchedule(_ fname: String) -> [String] {
     do {
         let fileManager = FileManager.default
@@ -60,4 +63,63 @@ func readSchedule(_ fname: String) -> [String] {
         print("Error: \(error)")
         return []
     }
+}
+
+//requests permission from user for notifications
+func requestPermission() {
+    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+        if granted {
+            print("Permission granted")
+        } else if let error = error {
+            print("Error: \(error.localizedDescription)")
+        }
+    }
+}
+
+// sends out a notification
+func sendNotification(_ title: String, _ body: String) {
+    let content = UNMutableNotificationContent()
+    content.title = title
+    content.body = body
+    content.sound = UNNotificationSound.default
+    
+    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+
+    let id = UUID().uuidString
+    let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
+
+    UNUserNotificationCenter.current().add(request) { error in
+        if let error = error {
+            print("Failed to schedule notification: \(error.localizedDescription)")
+        } else {
+            print("Notification scheduled successfully!")
+        }
+    }
+    
+}
+
+// checks if user has granted notification permissions
+func checkNotificationPermission() async -> UNAuthorizationStatus {
+    let settings = await UNUserNotificationCenter.current().notificationSettings()
+    return settings.authorizationStatus
+}
+
+func setCalendarNotification(_ day: Int, _ month: Int, _ year: Int, _ hour: Int, _ minute: Int, _ title: String, _ body: String) {
+    var dateComponents = DateComponents()
+    dateComponents.year = year
+    dateComponents.month = month
+    dateComponents.day = day
+    dateComponents.hour = hour
+    dateComponents.minute = minute
+
+    let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+    
+    let content = UNMutableNotificationContent()
+    content.title = title
+    content.body = body
+    content.sound = .default
+    
+    let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+    UNUserNotificationCenter.current().add(request)
+    
 }
